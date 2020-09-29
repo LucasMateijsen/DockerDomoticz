@@ -40,7 +40,9 @@ services:
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/domoticz/zigbee2mqtt:/app/data
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/zigbee2mqtt:/app/data
       - /run/udev:/run/udev:ro
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
+    restart: always
+    network_mode: host
