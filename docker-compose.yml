@@ -25,8 +25,8 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-     # - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/data:/mosquitto/data
-     # - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/log:/mosquitto/log
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/data:/mosquitto/data
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/log:/mosquitto/log
     ports:
       - 9001:9001
 
