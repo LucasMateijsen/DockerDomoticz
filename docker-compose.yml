@@ -11,7 +11,7 @@ services:
     volumes:
       - /srv/dev-disk-by-label-raidfs/Containers/domoticz/domoticz:/config
     ports:
-      - 8080:10000
+      - 10000:8080
       - 6144:6144
       - 1443:1443
     restart: unless-stopped
