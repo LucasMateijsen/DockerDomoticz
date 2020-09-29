@@ -4,6 +4,8 @@ services:
   domoticz:
     image: linuxserver/domoticz:latest
     container_name: domoticz
+    depends_on:
+      - zigbee
     environment:
       - PUID=1001
       - GUID=1001
@@ -22,13 +24,15 @@ services:
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/config/mosquitto.conf:mosquitto.conf
-      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/data:/mosquitto/data
-      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/log:/mosquitto/log
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+     # - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/data:/mosquitto/data
+     # - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/log:/mosquitto/log
     ports:
       - 9001:9001
 
   zigbee:
+    depends_on:
+      - mqtt
     image: koenkk/zigbee2mqtt
     container_name: zigbee
     privileged: true
