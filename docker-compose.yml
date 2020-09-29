@@ -15,17 +15,19 @@ services:
       - 6144:6144
       - 1443:1443
     restart: unless-stopped
-    
+
   mqtt:
     image: eclipse-mosquitto
     container_name: mqtt
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/domoticz/mosquitto:/mosquitto/config
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/config/mosquitto.conf:mosquitto.conf
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/data:/mosquitto/data
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/mosquitto/log:/mosquitto/log
     ports:
       - 9001:9001
-      
+
   zigbee:
     image: koenkk/zigbee2mqtt
     container_name: zigbee
