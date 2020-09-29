@@ -36,7 +36,9 @@ services:
       - mqtt
     image: koenkk/zigbee2mqtt
     container_name: zigbee
+    restart: always
     privileged: true
+    network_mode: host
     environment:
       - TZ=Europe/Amsterdam
     volumes:
