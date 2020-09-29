@@ -1,0 +1,39 @@
+version: '3.2'
+
+services:
+  domoticz:
+    image: linuxserver/domoticz:latest
+    container_name: domoticz
+    environment:
+      - PUID=1001
+      - GUID=1001
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/domoticz:/config
+    ports:
+      - 8080:8080
+      - 6144:6144
+      - 1443:1443
+    restart: unless-stopped
+    
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/domoticz/mosquitto:/mosquitto/config
+    ports:
+      - 9001:9001
+      
+  zigbee:
+    image: koenkk/zigbee2mqtt
+    container_name: zigbee
+    privileged: true
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /srv/dev-disk-by-label-raidfs/Containers/domoticz/domoticz/zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
